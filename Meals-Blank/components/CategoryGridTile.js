@@ -4,7 +4,7 @@ function CategoryGridTile({ title, color }) {
   return (
     <View style={styles.gridItem}>
       <Pressable
-        android_ripple={{ color: '#ccc' }}
+        android_ripple={{ color: '#ccc' }} // for ripple effect on android
         style={({ pressed }) => [
           styles.button,
           pressed ? styles.buttonPressed : null
@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     margin: 16,
     height: 150,
     borderRadius: 8,
-    elevation: 4,
-    backgroundColor: 'white',
-    shadowColor: 'black',
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    overflow: Platform.OS === 'android' ? 'hidden' : 'visible'
+    elevation: 4, // for shadow on android
+    backgroundColor: 'white', // for shadow on ios
+    shadowColor: 'black', // for shadow on ios
+    shadowOpacity: 0.25, // for shadow on ios
+    shadowOffset: { width: 0, height: 2 }, // for shadow on ios
+    shadowRadius: 8, // for shadow on ios
+    overflow: Platform.OS === 'android' ? 'hidden' : 'visible' // for ripple effect on ios
   },
   button: {
     flex: 1
