@@ -1,11 +1,10 @@
-import { useNavigation } from '@react-navigation/native'
 import { Button, StyleSheet, Text, View } from 'react-native'
 
 function UserScreen() {
-  const navigation = useNavigation()
+  //   const navigation = useNavigation()
 
   function openDrawerHandler() {
-    navigation.openDrawer()
+    navigation.toggleDrawer()
   }
 
   return (
