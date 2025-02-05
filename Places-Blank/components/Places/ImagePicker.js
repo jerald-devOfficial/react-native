@@ -4,7 +4,7 @@ import {
   useCameraPermissions
 } from 'expo-image-picker'
 import { useState } from 'react'
-import { Alert, Image, StyleSheet, Text, View } from 'react-native'
+import { Alert, Image, Linking, StyleSheet, Text, View } from 'react-native'
 
 import { Colors } from '../../constants/colors'
 import OutlinedButton from '../UI/OutlinedButton'
@@ -25,7 +25,11 @@ function ImagePicker() {
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
         'Insufficient Permissions!',
-        'You need to grant camera permissions to use this app.'
+        'You need to grant camera permissions to use this app.',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          { text: 'Open Settings', onPress: () => Linking.openSettings() }
+        ]
       )
       return false
     }
@@ -46,7 +50,7 @@ function ImagePicker() {
       quality: 0.5
     })
 
-    setPickedImage(image.uri)
+    setPickedImage(image.assets[0].uri)
   }
 
   let imagePreview = <Text>No image taken yet.</Text>
