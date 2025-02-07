@@ -1,23 +1,35 @@
+import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import {
   getCurrentPositionAsync,
   PermissionStatus,
   useForegroundPermissions
 } from 'expo-location'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Alert, Image, StyleSheet, Text, View } from 'react-native'
 
-import { useNavigation } from '@react-navigation/native'
 import { Colors } from '../../constants/colors'
-import OutlinedButton from '../UI/OutlinedButton'
-
 import { getMapPreview } from '../../util/location'
+import OutlinedButton from '../UI/OutlinedButton'
 
 function LocationPicker() {
   const [pickedLocation, setPickedLocation] = useState()
+  const isFocused = useIsFocused() // check if the screen is focused, if it is, then the location picker will be shown
 
   const navigation = useNavigation()
+  const route = useRoute()
+
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions()
+
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const mapPickedLocation = {
+        lat: route.params.pickedLat,
+        lng: route.params.pickedLng
+      }
+      setPickedLocation(mapPickedLocation)
+    }
+  }, [route, isFocused])
 
   async function verifyPermissions() {
     if (
