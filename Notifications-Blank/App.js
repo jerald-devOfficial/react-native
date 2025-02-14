@@ -31,7 +31,7 @@ export default function App() {
       }
 
       const pushTokenData = await Notifications.getExpoPushTokenAsync()
-      console.log(pushTokenData)
+      console.log('pushTokenData: ', pushTokenData)
 
       if (Platform.OS === 'android') {
         Notifications.setNotificationChannelAsync('default', {
