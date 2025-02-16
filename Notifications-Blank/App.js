@@ -2,6 +2,7 @@ import * as Notifications from 'expo-notifications'
 import { StatusBar } from 'expo-status-bar'
 import { useEffect } from 'react'
 import { Alert, Button, Platform, StyleSheet, View } from 'react-native'
+import { expoPushToken } from './env'
 
 Notifications.setNotificationHandler({
   handleNotification: async () => {
@@ -91,7 +92,7 @@ export default function App() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        to: '<Your Device Push Token>]',
+        to: expoPushToken,
         title: 'Test - sent from a device!',
         body: 'This is a test!'
       })
